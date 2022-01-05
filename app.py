@@ -10,7 +10,7 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 client = MongoClient(
-    os.environ['TODO_DB_1_PORT_27017_TCP_ADDR'] , 
+    os.environ['DB_PORT_27017_TCP_ADDR'] , 
     27017)
 db = client.tododb
 
