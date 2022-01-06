@@ -2,9 +2,7 @@ from flask import  Flask , redirect, url_for, jsonify
 from flask.templating import render_template
 from pymongo import MongoClient
 import json
-
-
-
+from bson.json_util import dumps, loads
 
 app = Flask(__name__)
 myclient=MongoClient('db',27017)
@@ -39,8 +37,12 @@ def new():
 
 @app.route('/get' , methods=['GET'])
 def get():
-    getting_one = db.table.find()
-    return json.dumps(getting_one, default=str)
+    mycollection = db.table
+    cursor = mycollection.find()
+    list_cur = list(cursor)
+    json_data = dumps(list_cur, indent = 2) 
+ 
+    return json_data
   
 
 if __name__=="__main__":
